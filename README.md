@@ -1,2 +1,2 @@
 # nb_twitter
-A Naive Bayes algorithm used to classify the mood of tweets.
+A Naive Bayes classifier used to classify the mood of tweets.
