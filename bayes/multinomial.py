@@ -4,7 +4,7 @@
 # nb_twitter
 #
 # Created by Thomas Nelson <tn90ca@gmail.com>
-#            Preston Engstrom <>
+#            Preston Engstrom <pe12nh@brocku.ca>
 # Created..........................2015-06-23
 # Modified.........................2015-06-25
 #
@@ -69,5 +69,29 @@ class Multinomial (bayes.Bayes):
 
         return score
     # end def run
+
+    def concatenate_class_documents(self, c):
+        """This method will concatenate all the words of each document
+        belonging to the provided class. This method will append every
+        occurrence of a word.
+
+        :param c: The class of training documents to concatenate.
+
+        :raise AssertionError: An error indicating document was not of type
+                               list.
+
+        :return text: A concatenated list of all words belonging to a class.
+
+        """
+
+        text = []
+
+        for d in self.D:
+            assert type(d) == list, "document not a list: %r" % d
+            if d[0] == c:
+                text.extend(d[1].split())
+
+        return text
+    # end def concatenate_class_documents
 
 # end class Multinomial

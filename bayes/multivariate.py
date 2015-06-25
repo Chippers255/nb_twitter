@@ -4,7 +4,7 @@
 # nb_twitter
 #
 # Created by Thomas Nelson <tn90ca@gmail.com>
-#            Preston Engstrom <>
+#            Preston Engstrom <pe12nh@brocku.ca>
 # Created..........................2015-06-23
 # Modified.........................2015-06-25
 #
@@ -75,5 +75,27 @@ class Multivariate (bayes.Bayes):
 
         return score
     # end def run
+
+    def count_documents_from_class_term(self, c, w):
+        """This method will count the number of documents belonging to a class
+        'c' that contain the word 'w'.
+
+        :param c: The class of documents to count.
+
+        :param w: The word a counted document must contain.
+
+        :return Ncw: The count of documents in a class with a specific word.
+
+        """
+
+        Ncw = 0
+
+        for d in self.D:
+            assert type(d) == list, "document not a list: %r" % d
+            if d[0] == c and w in d[1].split():
+                Ncw += 1
+
+        return Ncw
+    # end def count_documents_from_class_term
 
 # end class Multivariate
