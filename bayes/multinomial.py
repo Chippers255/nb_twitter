@@ -6,7 +6,7 @@
 # Created by Thomas Nelson <tn90ca@gmail.com>
 #            Preston Engstrom <>
 # Created..........................2015-06-23
-# Modified.........................2015-06-24
+# Modified.........................2015-06-25
 #
 # This script was developed for use as part of the nb_twitter package
 
@@ -25,8 +25,10 @@ class Multinomial (bayes.Bayes):
 
     """
 
-    def train (self):
-        """
+    def train(self):
+        """This method will train a multinomial naive bayes text classifier.
+        The classifier will by trained using the provided classes and documents
+        from the initializer.
 
         """
 
@@ -34,23 +36,25 @@ class Multinomial (bayes.Bayes):
             self.prior[c] = float(self.Nc[c]) / float(self.N)
             concat_text = self.concatenate_class_documents(c)
 
-            sum   = 0.0
+            sum = 0.0
             count = {}
             for w in self.V:
                 self.prob[w] = {}
                 count[w] = float(concat_text.count(w))
-                sum     += count[w] + 1.0
+                sum += count[w] + 1.0
 
             for w in self.V:
                 self.prob[w][c] = (count[w] + 1.0) / sum
     # end def train
 
-    def run (self, d):
-        """
+    def run(self, d):
+        """This method will run the trained multinomial naive bayes text
+        classifier. This method will classify the provided document into
+        a class.
 
-        :param d:
+        :param d: The new document to be classified.
 
-        :return score:
+        :return score: A dictionary of scores for this document in each class.
 
         """
 
