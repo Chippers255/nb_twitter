@@ -12,10 +12,11 @@
 
 
 import math
-import bayes
+from bayes import Bayes
+from decorators import string_check
 
 
-class Multinomial (bayes.Bayes):
+class Multinomial (Bayes):
     """This model of Naive Bayes, as described by Manning et al (2008),
     estimates the conditional probability of a particular word given a class as
     the relative frequency of word 'w' in documents belonging to class 'c'.
@@ -47,6 +48,7 @@ class Multinomial (bayes.Bayes):
                 self.prob[w][c] = (count[w] + 1.0) / sum
     # end def train
 
+    @string_check
     def run(self, d):
         """This method will run the trained multinomial naive bayes text
         classifier. This method will classify the provided document into
@@ -70,15 +72,13 @@ class Multinomial (bayes.Bayes):
         return score
     # end def run
 
+    @string_check
     def concatenate_class_documents(self, c):
         """This method will concatenate all the words of each document
         belonging to the provided class. This method will append every
         occurrence of a word.
 
         :param c: The class of training documents to concatenate.
-
-        :raise AssertionError: An error indicating document was not of type
-                               list.
 
         :return text: A concatenated list of all words belonging to a class.
 
@@ -87,7 +87,6 @@ class Multinomial (bayes.Bayes):
         text = []
 
         for d in self.D:
-            assert type(d) == list, "document not a list: %r" % d
             if d[0] == c:
                 text.extend(d[1].split())
 

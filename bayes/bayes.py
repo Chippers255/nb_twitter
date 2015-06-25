@@ -11,12 +11,16 @@
 # This script was developed for use as part of the nb_twitter package
 
 
+from decorators import constructor, string_check
+
+
 class Bayes (object):
     """This abstract base class is the template for each of the different types
     of naive bayes text classifiers.
 
     """
 
+    @constructor
     def __init__(self, classes, documents):
         """The initializer method will define all required class variables
         calling all required methods to fill values.
@@ -25,14 +29,7 @@ class Bayes (object):
 
         :param documents: A list of documents to be used for training.
 
-        :raise AssertionError: An error indicating classes or documents was not
-                               of type list.
-
         """
-
-        # Assert the class arguments are filled in properly
-        assert type(classes) == list, "classes not a list: %r" % classes
-        assert type(documents) == list, "documents not a list: %r" % documents
 
         self.C = classes  # A list of classes
         self.D = documents  # A list of document/class pairs
@@ -52,13 +49,9 @@ class Bayes (object):
         """This method will loop through each document and extract all original
         words and add them to the vocabulary list.
 
-        :raise AssertionError: An error indicating document was not of type
-                               list.
-
         """
 
         for d in self.D:
-            assert type(d) == list, "document not a list: %r" % d
             for w in d[1].split():
                 if w not in self.V:
                     self.V.append(w)
@@ -68,19 +61,16 @@ class Bayes (object):
         """This method will count the number of training documents belonging to
         each class.
 
-        :raise AssertionError: An error indicating document was not of type
-                               list.
-
         """
 
         for c in self.C:
             self.Nc[c] = 0
             for d in self.D:
-                assert type(d) == list, "document not a list: %r" % d
                 if c == d[0]:
                     self.Nc[c] += 1
     # end def count_class_documents
 
+    @string_check
     def extract_words_from_document(self, d):
         """This method will generate a list of all words in a provided
         document that are also present in our training word list.
