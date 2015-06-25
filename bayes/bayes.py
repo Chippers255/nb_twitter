@@ -6,7 +6,7 @@
 # Created by Thomas Nelson <tn90ca@gmail.com>
 #            Preston Engstrom <>
 # Created..........................2015-06-24
-# Modified.........................2015-06-24
+# Modified.........................2015-06-25
 #
 # This script was developed for use as part of the nb_twitter package
 
@@ -17,7 +17,7 @@ class Bayes (object):
 
     """
 
-    def __init__ (self, classes, documents):
+    def __init__(self, classes, documents):
         """The initializer method will define all required class variables
         calling all required methods to fill values.
 
@@ -38,17 +38,17 @@ class Bayes (object):
         self.D = documents  # A list of document/class pairs
         self.N = len(documents)  # The number of training documents
 
-        self.V  = []  # A list of all words in the training documents
+        self.V = []  # A list of all words in the training documents
         self.Nc = {}  # The number of training documents in each class
 
         self.prior = {}  # The probability of each class
-        self.prob  = {}  # The conditional probability of each word to a class
+        self.prob = {}  # The conditional probability of each word to a class
 
         self.extract_vocabulary()
         self.count_class_documents()
     # end def __init__
 
-    def extract_vocabulary (self):
+    def extract_vocabulary(self):
         """This method will loop through each document and extract all original
         words and add them to the vocabulary list.
 
@@ -64,7 +64,7 @@ class Bayes (object):
                     self.V.append(w)
     # end def extract_vocabulary
 
-    def count_class_documents (self):
+    def count_class_documents(self):
         """This method will count the number of training documents belonging to
         each class.
 
@@ -81,7 +81,7 @@ class Bayes (object):
                     self.Nc[c] += 1
     # end def count_class_documents
 
-    def concatenate_class_documents (self, c):
+    def concatenate_class_documents(self, c):
         """This method will concatenate all the words of each document
         belonging to the provided class. This method will append every
         occurrence of a word.
@@ -105,7 +105,29 @@ class Bayes (object):
         return text
     # end def concatenate_class_documents
 
-    def extract_words_from_document (self, d):
+    def count_documents_from_class_term(self, c, w):
+        """This method will count the number of documents belonging to a class
+        'c' that contain the word 'w'.
+
+        :param c: The class of documents to count.
+
+        :param w: The word a counted document must contain.
+
+        :return Ncw: The count of documents in a class with a specific word.
+
+        """
+
+        Ncw = 0
+
+        for d in self.D:
+            assert type(d) == list, "document not a list: %r" % d
+            if d[0] == c and w in d[1].split():
+                Ncw += 1
+
+        return Ncw
+    # end def count_documents_from_class_term
+
+    def extract_words_from_document(self, d):
         """This method will generate a list of all words in a provided
         document that are also present in our training word list.
 
