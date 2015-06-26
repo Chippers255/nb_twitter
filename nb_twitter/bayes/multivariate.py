@@ -33,6 +33,9 @@ class Multivariate (Bayes):
     occurrences of the words. Note that it is particularly
     sensitive to the presence of noisy features.
 
+    Multivariate Reference Page:
+    http://nlp.stanford.edu/IR-book/html/htmledition/the-bernoulli-model-1.html
+
     """
 
     def train(self):

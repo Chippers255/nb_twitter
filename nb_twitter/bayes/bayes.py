@@ -71,9 +71,11 @@ class Bayes (object):
     # end def count_class_documents
 
     @string_check
-    def extract_words_from_document(self, d):
+    def extract_words_from_document(self, sub_class, d):
         """This method will generate a list of all words in a provided
         document that are also present in our training word list.
+
+        :param sub_class: The type of subclass using this method
 
         :param d: A non training document of text.
 
@@ -85,7 +87,10 @@ class Bayes (object):
 
         for w in d.split():
             if w in self.V:
-                W.append(w)
+                if sub_class == 'binarized' and w in W:
+                    pass
+                else:
+                    W.append(w)
 
         return W
     # end def extract_words_from_document

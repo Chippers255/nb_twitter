@@ -24,6 +24,9 @@ class Multinomial (Bayes):
     This variation takes into account the number of occurrences of word 'w' in
     training documents from class 'c', including multiple occurrences.
 
+    Multinomial Reference Paper:
+    http://nlp.stanford.edu/IR-book/html/htmledition/naive-bayes-text-classification-1.html
+
     """
 
     def train(self):
