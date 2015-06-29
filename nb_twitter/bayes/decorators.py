@@ -6,7 +6,7 @@
 # Created by Thomas Nelson <tn90ca@gmail.com>
 #            Preston Engstrom <pe12nh@brocku.ca>
 # Created..........................2015-06-25
-# Modified.........................2015-06-26
+# Modified.........................2015-06-29
 #
 # This script was developed for use as part of the nb_twitter package
 
@@ -20,15 +20,15 @@ def constructor(func):
 
     """
 
-    def wrapper(*args):
-        assert type(args[0]) == list, "classes not a list: %r" % args[0]
-        assert type(args[1]) == list, "documents not a list: %r" % args[1]
+    def wrapper(*args, **kwargs):
+        assert type(args[1]) == list, "classes not a list: %r" % args[1]
+        assert type(args[2]) == list, "documents not a list: %r" % args[2]
 
-        for c in args[0]:
+        for c in args[1]:
             assert type(c) == str, \
-                "classes contains a non string value: %r" % args[0]
+                "classes contains a non string value: %r" % args[1]
 
-        for d in args[1]:
+        for d in args[2]:
             assert type(d) == list, \
                 "documents contains a non list value: %r" % d
             assert type(d[0]) == str, \
@@ -36,7 +36,7 @@ def constructor(func):
             assert type(d[1]) == str, \
                 "documents contains a non string value: %r" % d
 
-        return func(*args)
+        return func(*args, **kwargs)
     # end def wrapper
 
     return wrapper
@@ -48,14 +48,14 @@ def string_check(func):
 
     """
 
-    def wrapper(*args):
+    def wrapper(*args, **kwargs):
 
         for x in range(len(args)):
             if x > 0:
                 assert type(args[x]) == str, \
                     "argument not a string: %r" % args[x]
 
-        return func(*args)
+        return func(*args, **kwargs)
     # end def wrapper
 
     return wrapper
