@@ -1,0 +1,1 @@
+Search.setIndex({envversion:46,filenames:["index","introduction"],objects:{},objnames:{},objtypes:{},terms:{capabl:1,classifi:1,content:0,index:0,introduct:[],librari:1,modul:0,mood:1,page:0,search:0,stream:1,tweet:1},titles:["Welcome to NB_Twitter&#8217;s documentation!","Introduction"],titleterms:{document:0,indic:0,introduct:1,nb_twitter:0,tabl:0,welcom:0}})
