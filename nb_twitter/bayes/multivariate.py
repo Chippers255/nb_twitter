@@ -6,7 +6,7 @@
 # Created by Thomas Nelson <tn90ca@gmail.com>
 #            Preston Engstrom <pe12nh@brocku.ca>
 # Created..........................2015-06-23
-# Modified.........................2015-06-26
+# Modified.........................2015-06-29
 #
 # This script was developed for use as part of the nb_twitter package
 
@@ -47,11 +47,11 @@ class Multivariate (Bayes):
 
         for c in self.C:
             self.prior[c] = float(self.Nc[c]) / float(self.N)
+            self.prob[c] = {}
 
             for w in self.V:
-                self.prob[w] = {}
                 Ncw = self.count_documents_from_class_term(c, w)
-                self.prob[w][c] = (Ncw + 1.0) / (self.Nc[c] + 2.0)
+                self.prob[c][w] = (Ncw + 1.0) / (self.Nc[c] + 2.0)
     # end def train
 
     @string_check
@@ -68,15 +68,15 @@ class Multivariate (Bayes):
 
         score = {}
 
-        W = self.extract_words_from_document(d)
+        W = self.extract_words_from_document('multivariate', d)
 
         for c in self.C:
             score[c] = math.log(self.prior[c])
             for w in self.V:
                 if w in W:
-                    score[c] += math.log(self.prob[w][c])
+                    score[c] += math.log(self.prob[c][w])
                 else:
-                    score[c] += math.log(1 - self.prob[w][c])
+                    score[c] += math.log(1 - self.prob[c][w])
 
         return score
     # end def run
