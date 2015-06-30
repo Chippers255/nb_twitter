@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 
-# test_multivariate.py
+# test_multinomial.py
 # nb_twitter/nb_twitter/bayes
 #
 # Created by Thomas Nelson <tn90ca@gmail.com>
 #            Preston Engstrom <pe12nh@brocku.ca>
-# Created..........................2015-06-29
+# Created..........................2015-06-30
 # Modified.........................2015-06-30
 #
 # This script was developed for use as part of the nb_twitter package
 
 
-from nb_twitter.bayes import multivariate
+from nb_twitter.bayes import multinomial
 
 
 train_class = ['c', 'j']
@@ -23,7 +23,7 @@ train_docs = [['c', 'chinese beijing chinese'],
 
 test_docs = 'chinese chinese chinese tokyo japan'
 
-classifier = multivariate.Multivariate(train_class, train_docs)
+classifier = multinomial.Multinomial(train_class, train_docs)
 
 classifier.train()
 results = classifier.run(test_docs)
@@ -35,7 +35,6 @@ print("V\t\t=", classifier.V)
 print("Nc\t\t=", classifier.Nc)
 print("Prior\t=", classifier.prior)
 print("Prob\t=", classifier.prob)
-print()
 print()
 print("J =", results['j'])
 print("C =", results['c'])
