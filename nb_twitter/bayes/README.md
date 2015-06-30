@@ -9,7 +9,7 @@ This model of Naive Bayes, as described by Manning et al (2008), estimates the c
 
 This variation takes into account the number of occurrences of word 'w' in training documents from class 'c', including multiple occurrences.
 
-## Multinomial Class
+## Multivariate Class
 Also known as the Bernoulli variation, as described by Manning et al (2008), generatesa Boolean indicator about each term of the vocabulary equal to 1 if the term belongs to the examining document and 0 if it does not. The model of this variation is significantly different from Multinomial not only because it does not take into consideration the number of occurrences of each word, but also because it takes into account the non-occurring terms within the document. While in Multinomial model the non-occurring terms are completely ignored, in Bernoulli model they are factored when computing the conditional probabilities and thus the absence of terms is taken into account.
 
 Bernoulli model is known to make many mistakes while classifying long documents, primarily because it does not take into account the multiple occurrences of the words. Note that it is particularly sensitive to the presence of noisy features.
