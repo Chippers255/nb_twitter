@@ -12,11 +12,11 @@
 
 
 import math
-from bayes import Bayes
-from decorators import string_check
+import nb_twitter.bayes.bayes as bayes
+import nb_twitter.bayes.decorators as decorators
 
 
-class Multinomial (Bayes):
+class Multinomial (bayes.Bayes):
     """This model of Naive Bayes, as described by Manning et al (2008),
     estimates the conditional probability of a particular word given a class as
     the relative frequency of word 'w' in documents belonging to class 'c'.
@@ -42,16 +42,16 @@ class Multinomial (Bayes):
 
             sum = 0.0
             count = {}
+            self.prob[c] = {}
             for w in self.V:
-                self.prob[w] = {}
                 count[w] = float(concat_text.count(w))
                 sum += count[w] + 1.0
 
             for w in self.V:
-                self.prob[w][c] = (count[w] + 1.0) / sum
+                self.prob[c][w] = (count[w] + 1.0) / sum
     # end def train
 
-    @string_check
+    @decorators.string_check
     def run(self, d):
         """This method will run the trained multinomial naive bayes text
         classifier. This method will classify the provided document into
@@ -65,17 +65,17 @@ class Multinomial (Bayes):
 
         score = {}
 
-        W = self.extract_words_from_document(d)
+        W = self.extract_words_from_document('multinomial', d)
 
         for c in self.C:
             score[c] = math.log(self.prior[c])
             for w in W:
-                score[c] += math.log(self.prob[w][c])
+                score[c] += math.log(self.prob[c][w])
 
         return score
     # end def run
 
-    @string_check
+    @decorators.string_check
     def concatenate_class_documents(self, c):
         """This method will concatenate all the words of each document
         belonging to the provided class. This method will append every

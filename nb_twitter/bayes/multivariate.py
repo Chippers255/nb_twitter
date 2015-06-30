@@ -12,11 +12,11 @@
 
 
 import math
-from bayes import Bayes
-from decorators import string_check
+import nb_twitter.bayes.bayes as bayes
+import nb_twitter.bayes.decorators as decorators
 
 
-class Multivariate (Bayes):
+class Multivariate (bayes.Bayes):
     """The Bernoulli variation, as described by Manning et al (2008), generates
     a Boolean indicator about each term of the vocabulary equal to 1 if the
     term belongs to the examining document and 0 if it does not. The model of
@@ -54,7 +54,7 @@ class Multivariate (Bayes):
                 self.prob[c][w] = (Ncw + 1.0) / (self.Nc[c] + 2.0)
     # end def train
 
-    @string_check
+    @decorators.string_check
     def run(self, d):
         """This method will run the trained multivariate naive bayes text
         classifier. This method will classify the provided document into
@@ -81,7 +81,7 @@ class Multivariate (Bayes):
         return score
     # end def run
 
-    @string_check
+    @decorators.string_check
     def count_documents_from_class_term(self, c, w):
         """This method will count the number of documents belonging to a class
         'c' that contain the word 'w'.

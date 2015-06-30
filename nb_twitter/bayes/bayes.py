@@ -11,7 +11,7 @@
 # This script was developed for use as part of the nb_twitter package
 
 
-from decorators import constructor, string_check
+import nb_twitter.bayes.decorators as decorators
 
 
 class Bayes (object):
@@ -20,7 +20,7 @@ class Bayes (object):
 
     """
 
-    @constructor
+    @decorators.constructor
     def __init__(self, classes, documents):
         """The initializer method will define all required class variables
         calling all required methods to fill values.
@@ -70,7 +70,7 @@ class Bayes (object):
                     self.Nc[c] += 1
     # end def count_class_documents
 
-    @string_check
+    @decorators.string_check
     def extract_words_from_document(self, sub_class, d):
         """This method will generate a list of all words in a provided
         document that are also present in our training word list.
