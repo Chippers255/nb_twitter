@@ -6,17 +6,17 @@
 # Created by Thomas Nelson <tn90ca@gmail.com>
 #            Preston Engstrom <pe12nh@brocku.ca>
 # Created..........................2015-06-24
-# Modified.........................2015-06-26
+# Modified.........................2015-06-30
 #
 # This script was developed for use as part of the nb_twitter package
 
 
 import math
-from bayes import Bayes
-from decorators import string_check
+import nb_twitter.bayes.bayes as bayes
+import nb_twitter.bayes.decorators as decorators
 
 
-class Binarized (Bayes):
+class Binarized (bayes.Bayes):
     """This model of Naive Bayes, as described by Dan Jurafsky, is identical to
     the Multinomial Naive Bayes model with only difference that instead of
     measuring all the occurrences of the term t in the document, it measures it
@@ -49,17 +49,17 @@ class Binarized (Bayes):
 
             sum = 0.0
             count = {}
+            self.prob[c] = {}
             for w in self.V:
-                self.prob[w] = {}
                 count[w] = float(concat_text.count(w))
                 count[w] = 1.0 if count[w] >= 1 else 0
                 sum += count[w] + 1.0
 
             for w in self.V:
-                self.prob[w][c] = (count[w] + 1.0) / sum
+                self.prob[c][w] = (count[w] + 1.0) / sum
     # end def train
 
-    @string_check
+    @decorators.string_check
     def run(self, d):
         """This method will run the trained binarized naive bayes text
         classifier. This method will classify the provided document into
@@ -78,12 +78,12 @@ class Binarized (Bayes):
         for c in self.C:
             score[c] = math.log(self.prior[c])
             for w in W:
-                score[c] += math.log(self.prob[w][c])
+                score[c] += math.log(self.prob[c][w])
 
         return score
     # end def run
 
-    @string_check
+    @decorators.string_check
     def concatenate_class_documents(self, c):
         """This method will concatenate all the words of each document
         belonging to the provided class. This method will append every
