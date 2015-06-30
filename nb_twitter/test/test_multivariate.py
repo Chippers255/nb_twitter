@@ -6,7 +6,7 @@
 # Created by Thomas Nelson <tn90ca@gmail.com>
 #            Preston Engstrom <pe12nh@brocku.ca>
 # Created..........................2015-06-29
-# Modified.........................2015-06-29
+# Modified.........................2015-06-30
 #
 # This script was developed for use as part of the nb_twitter package
 
@@ -28,12 +28,12 @@ classifier = multivariate.Multivariate(train_class, train_docs)
 classifier.train()
 results = classifier.run(test_docs)
 
-print "C\t\t=", classifier.C
-print "D\t\t=", classifier.D
-print "N\t\t=", classifier.N
-print "V\t\t=", classifier.V
-print "Nc\t\t=", classifier.Nc
-print "Prior\t=", classifier.prior
-print "Prob\t=", classifier.prob
+print("C\t\t=", classifier.C)
+print("D\t\t=", classifier.D)
+print("N\t\t=", classifier.N)
+print("V\t\t=", classifier.V)
+print("Nc\t\t=", classifier.Nc)
+print("Prior\t=", classifier.prior)
+print("Prob\t=", classifier.prob)
 print
 print(results)
