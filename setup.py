@@ -52,7 +52,7 @@ _description = 'A Naive Bayes implementation to classify the mood of tweets.'
 _packages = find_packages(exclude=('test*', ))
 
 # Define required packages to be installed with nb_twitter
-_requires = ['tweepy', 'ujson']
+_requires = ['tweepy']
 
 # Define keywords associated with this module
 _keywords = 'twitter naive bayes mood moods classifier classify text tweepy ' \
